@@ -1,0 +1,529 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gautam Kumar Jha | Market Education Community</title>
+<meta name="description" content="A Telegram community for traders who want to understand price action, risk and discipline. Educational content only — not investment advice.">
+<style>
+  :root{
+    --paper:#F6F1E4;
+    --paper-dim:#EEE7D4;
+    --ink:#16233A;
+    --ink-soft:#4B5670;
+    --gold:#B8892B;
+    --gold-deep:#8E6A1F;
+    --rust:#A6432E;
+    --sage:#5C7A5E;
+    --charcoal:#11161F;
+    --line: rgba(22,35,58,0.14);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.serif{
+    font-family: Georgia, "Iowan Old Style", "Palatino Linotype", "Times New Roman", serif;
+    color:var(--ink);
+    font-weight:700;
+    letter-spacing:-0.01em;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
+  .eyebrow{
+    font-size:0.75rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--gold-deep);
+    font-weight:700;
+  }
+
+  /* HEADER */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(246,241,228,0.92);
+    backdrop-filter:saturate(140%) blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;max-width:1080px;margin:0 auto;}
+  .brand{font-family:Georgia,serif;font-weight:700;font-size:1.15rem;letter-spacing:-0.01em;}
+  .brand span{color:var(--gold-deep);}
+  .nav-links{display:flex;gap:28px;font-size:0.92rem;color:var(--ink-soft);}
+  .nav-links a:hover{color:var(--ink);}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--ink);color:var(--paper);
+    padding:11px 22px;border-radius:3px;
+    font-size:0.92rem;font-weight:600;
+    border:1px solid var(--ink);
+    transition:transform .15s ease, background .15s ease;
+  }
+  .btn:hover{background:var(--gold-deep);border-color:var(--gold-deep);transform:translateY(-1px);}
+  .btn-gold{background:var(--gold);border-color:var(--gold);color:#1a1300;}
+  .btn-gold:hover{background:var(--gold-deep);border-color:var(--gold-deep);color:#fff;}
+  .btn-sm{padding:8px 16px;font-size:0.85rem;}
+  .nav-cta{display:inline-flex;white-space:nowrap;}
+  @media(min-width:720px){.nav-links{display:flex;}}
+  @media(max-width:719px){.nav-links{display:none;}}
+  @media(max-width:400px){
+    .nav{padding:12px 16px;}
+    .nav-cta{padding:9px 14px;font-size:0.82rem;}
+    .nav-cta .full-label{display:none;}
+  }
+  .btn{min-height:44px;}
+  @media(max-width:719px){.wrap{padding:0 18px;}}
+
+  /* TICKER */
+  .ticker-outer{
+    background:var(--ink);color:var(--paper);
+    overflow:hidden;white-space:nowrap;
+    border-top:1px solid rgba(255,255,255,0.08);
+    border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  .ticker-track{
+    display:inline-block;
+    padding:9px 0;
+    animation: scroll-left 38s linear infinite;
+    font-size:0.78rem;
+    letter-spacing:0.03em;
+  }
+  .ticker-track span{margin-right:48px;color:rgba(246,241,228,0.85);}
+  .ticker-track span.dot{color:var(--gold);margin-right:48px;}
+  @keyframes scroll-left{
+    0%{transform:translateX(0);}
+    100%{transform:translateX(-50%);}
+  }
+  @media(prefers-reduced-motion:reduce){.ticker-track{animation:none;}}
+
+  /* HERO */
+  .hero{padding:44px 0 40px;position:relative;}
+  .hero-grid{display:grid;grid-template-columns:1fr;gap:40px;align-items:center;}
+  @media(min-width:860px){.hero-grid{grid-template-columns:1.1fr 0.9fr;}}
+  .hero h1{font-size:clamp(1.9rem,5vw,3.4rem);line-height:1.08;margin:10px 0 12px;}
+  .hero p.lead{font-size:1.05rem;color:var(--ink-soft);max-width:52ch;margin-bottom:18px;}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-bottom:12px;}
+  @media(max-width:719px){
+    .hero h1{font-size:1.7rem;margin:8px 0 10px;}
+    .hero p.lead{font-size:0.96rem;margin-bottom:16px;}
+  }
+  .microcopy{font-size:0.8rem;color:var(--ink-soft);}
+  .microcopy strong{color:var(--ink);}
+
+  .ledger-card{
+    background:var(--paper-dim);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:26px;
+    position:relative;
+  }
+  .ledger-card::before{
+    content:"";position:absolute;top:0;left:22px;right:22px;height:1px;background:var(--line);
+  }
+  .ledger-row{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px dashed var(--line);font-size:0.9rem;}
+  .ledger-row:last-child{border-bottom:none;}
+  .ledger-row .label{color:var(--ink-soft);}
+  .ledger-row .val{font-weight:700;font-family:Georgia,serif;}
+  .up{color:var(--sage);}
+  .down{color:var(--rust);}
+  .ledger-title{font-size:0.75rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--ink-soft);margin-bottom:6px;}
+
+  /* CANDLE DIVIDER */
+  .candles{display:flex;align-items:flex-end;gap:5px;height:40px;margin:8px 0;}
+  .candles i{display:block;width:5px;border-radius:1px;background:var(--sage);opacity:0.55;}
+  .candles i.d{background:var(--rust);}
+
+  section{padding:64px 0;}
+  .section-head{max-width:640px;margin-bottom:36px;}
+  .section-head h2{font-size:clamp(1.6rem,3vw,2.1rem);margin-top:10px;}
+  .section-head p{color:var(--ink-soft);margin-top:12px;font-size:1rem;}
+
+  /* MODULES (numbered — real sequence) */
+  .modules{display:grid;grid-template-columns:1fr;gap:0;border-top:1px solid var(--line);}
+  .module{
+    display:grid;grid-template-columns:64px 1fr;gap:20px;
+    padding:26px 0;border-bottom:1px solid var(--line);
+  }
+  .module .num{font-family:Georgia,serif;font-size:1.6rem;color:var(--gold-deep);font-weight:700;}
+  .module h3{font-size:1.1rem;margin-bottom:6px;}
+  .module p{color:var(--ink-soft);font-size:0.96rem;max-width:56ch;}
+
+  /* BENEFITS */
+  .benefits{display:grid;grid-template-columns:1fr;gap:18px;}
+  @media(min-width:720px){.benefits{grid-template-columns:1fr 1fr;}}
+  .benefit{
+    background:#fff;border:1px solid var(--line);border-radius:6px;padding:22px;
+  }
+  .benefit h3{font-size:1.02rem;margin-bottom:8px;display:flex;gap:10px;align-items:center;}
+  .benefit .mark{color:var(--gold-deep);font-size:1.2rem;}
+  .benefit p{color:var(--ink-soft);font-size:0.94rem;}
+
+  /* ABOUT */
+  .about{
+    background:var(--ink);color:var(--paper);
+    border-radius:8px;padding:44px;
+  }
+  .about h2{color:var(--paper);}
+  .about p{color:rgba(246,241,228,0.82);font-size:1rem;max-width:64ch;margin-top:14px;}
+  .about .eyebrow{color:var(--gold);}
+  .about-sig{margin-top:24px;font-family:Georgia,serif;font-style:italic;color:rgba(246,241,228,0.7);font-size:0.95rem;}
+
+  /* DISCLAIMER */
+  .disclaimer-box{
+    border:1px solid rgba(166,67,46,0.35);
+    background:rgba(166,67,46,0.05);
+    border-left:4px solid var(--rust);
+    border-radius:4px;padding:30px 30px;
+  }
+  .disclaimer-box h2{color:var(--rust);font-size:1.3rem;margin-bottom:14px;}
+  .disclaimer-box ul{padding-left:20px;color:var(--ink-soft);font-size:0.94rem;}
+  .disclaimer-box li{margin-bottom:10px;}
+  .disclaimer-box li strong{color:var(--ink);}
+
+  /* FAQ */
+  .faq-item{border-bottom:1px solid var(--line);padding:20px 0;}
+  .faq-item summary{cursor:pointer;font-weight:700;font-size:1rem;list-style:none;display:flex;justify-content:space-between;align-items:center;}
+  .faq-item summary::-webkit-details-marker{display:none;}
+  .faq-item summary::after{content:"+";font-size:1.3rem;color:var(--gold-deep);font-weight:400;}
+  .faq-item[open] summary::after{content:"–";}
+  .faq-item p{color:var(--ink-soft);margin-top:12px;font-size:0.95rem;max-width:62ch;}
+
+  /* FINAL CTA */
+  .final-cta{
+    text-align:center;padding:60px 24px;
+    background:var(--paper-dim);border-radius:8px;
+  }
+  .final-cta h2{font-size:clamp(1.6rem,3.4vw,2.2rem);margin-bottom:14px;}
+  .final-cta p{color:var(--ink-soft);max-width:50ch;margin:0 auto 26px;}
+
+  /* FOOTER */
+  footer{background:var(--charcoal);color:rgba(246,241,228,0.7);padding:48px 0 28px;margin-top:40px;}
+  .footer-grid{display:grid;grid-template-columns:1fr;gap:32px;}
+  @media(min-width:720px){.footer-grid{grid-template-columns:2fr 1fr 1fr;}}
+  footer h4{color:var(--paper);font-size:0.85rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:14px;}
+  footer .brand{color:var(--paper);}
+  footer p{font-size:0.88rem;line-height:1.6;max-width:44ch;}
+  footer ul{list-style:none;font-size:0.88rem;}
+  footer li{margin-bottom:10px;}
+  footer a:hover{color:var(--gold);}
+  .footer-bottom{
+    border-top:1px solid rgba(246,241,228,0.12);
+    margin-top:36px;padding-top:20px;
+    font-size:0.78rem;color:rgba(246,241,228,0.45);
+    display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;
+  }
+  .footer-legal{max-width:900px;font-size:0.76rem;color:rgba(246,241,228,0.4);margin-top:14px;line-height:1.6;}
+
+  .age-tag{
+    display:inline-block;font-size:0.72rem;letter-spacing:0.08em;
+    border:1px solid var(--line);border-radius:20px;padding:4px 12px;
+    color:var(--ink-soft);margin-bottom:10px;
+  }
+
+  /* LOGO */
+  .logo-round{
+    border-radius:50%;
+    object-fit:cover;
+    display:block;
+    background:var(--ink);
+  }
+  .nav-brand{display:flex;align-items:center;gap:10px;}
+  .nav-brand .logo-round{width:34px;height:34px;border:1px solid var(--line);}
+
+  .hero-logo{
+    display:flex;flex-direction:row;align-items:center;gap:14px;margin-bottom:14px;
+  }
+  .hero-logo .logo-round{
+    width:56px;height:56px;
+    border:2px solid var(--gold);
+    box-shadow:0 2px 10px rgba(22,35,58,0.12);
+    flex-shrink:0;
+  }
+  @media(max-width:719px){
+    .hero{padding:24px 0 28px;}
+    .hero-actions .btn{width:100%;justify-content:center;}
+    .about,.disclaimer-box,.final-cta{padding:26px 20px;}
+    .hero-logo{margin-bottom:10px;}
+    .hero-logo .logo-round{width:44px;height:44px;}
+  }
+  .logo-fallback{
+    width:100%;height:100%;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(135deg,var(--ink),#233350);
+    color:var(--gold);font-family:Georgia,serif;font-weight:700;
+  }
+  .nav-brand .logo-fallback{font-size:0.9rem;}
+  .hero-logo .logo-fallback{font-size:1.2rem;}
+
+  .hero-title-block .title-name{font-size:1.1rem;font-weight:700;font-family:Georgia,serif;}
+  .hero-title-block .title-tag{font-size:0.85rem;color:var(--ink-soft);}
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <div class="nav-brand">
+      <img class="logo-round" src="gtm.jpeg" alt="Gautam Kumar Jha logo"
+           onerror="this.outerHTML='<div class=&quot;logo-round&quot; style=&quot;width:34px;height:34px;&quot;><div class=&quot;logo-fallback&quot;>GKJ</div></div>'">
+      <div class="brand">Gautam Kumar Jha<span>.</span></div>
+    </div>
+    <div class="nav-links">
+      <a href="#learn">What You'll Learn</a>
+      <a href="#about">About</a>
+      <a href="#disclaimer">Disclaimer</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <a class="btn btn-sm nav-cta cta-telegram" href="https://telegram.me/+gG0HovqEwp02MDY1" target="_blank" rel="noopener">Join <span class="full-label">Telegram </span>→</a>
+  </nav>
+  <div class="ticker-outer">
+    <div class="ticker-track">
+      <span class="dot">●</span><span>Educational content only — not investment advice</span>
+      <span class="dot">●</span><span>Trading involves risk of loss, including loss of principal</span>
+      <span class="dot">●</span><span>Past performance does not indicate future results</span>
+      <span class="dot">●</span><span>Not a SEBI-registered Investment Adviser or Research Analyst</span>
+      <span class="dot">●</span><span>Always do your own research before investing</span>
+      <span class="dot">●</span><span>Educational content only — not investment advice</span>
+      <span class="dot">●</span><span>Trading involves risk of loss, including loss of principal</span>
+      <span class="dot">●</span><span>Past performance does not indicate future results</span>
+      <span class="dot">●</span><span>Not a SEBI-registered Investment Adviser or Research Analyst</span>
+      <span class="dot">●</span><span>Always do your own research before investing</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="hero-logo">
+          <img class="logo-round" src="gtm.jpeg" alt="Gautam Kumar Jha"
+               onerror="this.outerHTML='<div class=&quot;logo-round&quot; style=&quot;width:76px;height:76px;&quot;><div class=&quot;logo-fallback&quot;>GKJ</div></div>'">
+          <div class="hero-title-block">
+            <div class="title-name">Gautam Kumar Jha</div>
+            <div class="title-tag">Market Education · Free Telegram Channel</div>
+          </div>
+        </div>
+        <span class="age-tag">18+ · India · 100% Free to join</span>
+        <p class="eyebrow">Market Education Community</p>
+        <h1>Learn to read the market<br>before you trade it.</h1>
+        <p class="lead">A Telegram community for people who want to actually understand price action, risk, and discipline — not chase shortcuts. Built by a practitioner who learned the expensive way, so you don't have to repeat every mistake.</p>
+        <div class="hero-actions">
+          <a id="cta-hero" class="btn btn-gold cta-telegram" href="https://telegram.me/+gG0HovqEwp02MDY1" target="_blank" rel="noopener">Join the Telegram Channel →</a>
+        </div>
+        <p class="microcopy">Free to join · <strong>Educational content, not financial advice</strong> · No spam</p>
+      </div>
+
+      <div class="ledger-card">
+        <div class="ledger-title">Today's Session Notes — Sample Format</div>
+        <div class="ledger-row"><span class="label">Nifty 50 — structure</span><span class="val up">Higher highs</span></div>
+        <div class="ledger-row"><span class="label">Bank Nifty — range</span><span class="val down">Consolidating</span></div>
+        <div class="ledger-row"><span class="label">Key level to watch</span><span class="val">21,850</span></div>
+        <div class="ledger-row"><span class="label">Lesson of the day</span><span class="val">Risk sizing</span></div>
+        <div class="candles">
+          <i style="height:14px"></i><i class="d" style="height:24px"></i><i style="height:10px"></i>
+          <i class="d" style="height:30px"></i><i style="height:18px"></i><i style="height:22px"></i>
+          <i class="d" style="height:12px"></i><i style="height:28px"></i><i style="height:16px"></i>
+          <i class="d" style="height:20px"></i>
+        </div>
+        <p style="font-size:0.78rem;color:var(--ink-soft);">Illustrative format only. Not a live signal or trade recommendation.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="learn">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">The Learning Path</p>
+        <h2>What you'll actually work through</h2>
+        <p>No shortcuts, no "sure-shot" calls — just a structured way of thinking about markets, in order.</p>
+      </div>
+      <div class="modules">
+        <div class="module">
+          <div class="num">01</div>
+          <div><h3>Reading price action</h3><p>Candlestick structure, trend context, support and resistance — how to read a chart without relying on someone else's opinion.</p></div>
+        </div>
+        <div class="module">
+          <div class="num">02</div>
+          <div><h3>Risk & position sizing</h3><p>How much to risk before you know you're right, and why this matters more than any single entry point.</p></div>
+        </div>
+        <div class="module">
+          <div class="num">03</div>
+          <div><h3>Trade journaling</h3><p>Reviewing your decisions, not just your outcomes — the habit that separates a process from a guess.</p></div>
+        </div>
+        <div class="module">
+          <div class="num">04</div>
+          <div><h3>Market psychology</h3><p>Staying disciplined when it's hardest: after a loss, after a win, and everywhere in between.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Inside the Channel</p>
+        <h2>What you'll find when you join</h2>
+      </div>
+      <div class="benefits">
+        <div class="benefit"><h3><span class="mark">◆</span>Daily market notes</h3><p>Plain-language breakdowns of what's happening in the market and why — written to teach, not to instruct you what to buy or sell.</p></div>
+        <div class="benefit"><h3><span class="mark">◆</span>Chart setups, explained</h3><p>Real chart examples broken down for learning purposes, with the reasoning shown — not just a level and a "target."</p></div>
+        <div class="benefit"><h3><span class="mark">◆</span>Community discussion</h3><p>A space to ask questions and think out loud with other people who are serious about learning the process.</p></div>
+        <div class="benefit"><h3><span class="mark">◆</span>Weekly recap</h3><p>What went right, what didn't, and what it teaches — reviewed honestly, including the misses.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="about">
+        <p class="eyebrow">About</p>
+        <h2>Why this channel exists</h2>
+        <p>I'm Gautam Kumar Jha. I started out trading the same way most people do — undersized on research, oversized on positions, and reactive instead of deliberate. The losses taught me more than the wins ever did.</p>
+        <p>This channel exists to shorten that learning curve for others: honest breakdowns of what the market is doing, why it matters, and how to build a process that survives being wrong sometimes — because everyone is, sometimes.</p>
+        <p class="about-sig">No hype. No guaranteed calls. Just the work, shown honestly.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="disclaimer">
+    <div class="wrap">
+      <div class="disclaimer-box">
+        <h2>Please Read Before You Join</h2>
+        <ul>
+          <li><strong>Educational purpose only.</strong> Everything shared in this channel is for learning and informational purposes. Nothing here is investment advice, a recommendation, or a solicitation to buy or sell any security.</li>
+          <li><strong>Not SEBI-registered.</strong> Gautam Kumar Jha is not a SEBI-registered Investment Adviser or Research Analyst. Content reflects personal opinion and analysis shared for educational discussion only.</li>
+          <li><strong>Markets carry risk.</strong> Trading and investing in securities markets involves risk of loss, including loss of principal. Past performance does not indicate or guarantee future results.</li>
+          <li><strong>Do your own research.</strong> Please consult a SEBI-registered financial advisor before making any investment decision. You are responsible for your own trading and investment outcomes.</li>
+          <li><strong>No guarantees, ever.</strong> No content in this channel promises, implies, or guarantees any specific profit, return, or outcome.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">FAQ</p>
+        <h2>Common questions</h2>
+      </div>
+      <details class="faq-item" open>
+        <summary>Is this free to join?</summary>
+        <p>Yes — the core channel with market notes and educational content is free to join on Telegram.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Do you give buy/sell signals or guaranteed tips?</summary>
+        <p>No. This channel breaks down market structure and educational chart setups for learning purposes. It does not issue trade calls, and no outcome is ever guaranteed. Every trading decision — and its outcome — is yours alone.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Are you a SEBI-registered adviser?</summary>
+        <p>No. Content shared here is personal opinion and analysis for educational purposes only, and should not be treated as professional investment advice.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Who is this for?</summary>
+        <p>People who want to genuinely understand how markets work — beginners building a foundation, and active traders who want to sharpen their process. It's not for anyone looking for shortcuts or guaranteed returns, because those don't exist.</p>
+      </details>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="final-cta">
+        <p class="eyebrow">Ready when you are</p>
+        <h2>Start learning the process, not the shortcuts.</h2>
+        <p>Join a community built on honest breakdowns, real risk management, and zero guaranteed calls.</p>
+        <a id="cta-final" class="btn btn-gold cta-telegram" href="https://telegram.me/+gG0HovqEwp02MDY1" target="_blank" rel="noopener">Join the Telegram Channel →</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="brand" style="font-size:1.1rem;margin-bottom:12px;">Gautam Kumar Jha<span style="color:var(--gold)">.</span></div>
+        <p>Educational content on market structure, risk management, and trading psychology. Not investment advice. Not a SEBI-registered adviser.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#learn">What You'll Learn</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#disclaimer">Disclaimer</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:contact@gautamkumarjha@gmail.com">contact</a></li>
+          <li><a href="https://telegram.me/+gG0HovqEwp02MDY1" target="_blank" rel="noopener">Telegram Channel</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="text-align:center; margin:14px 0 10px 0; padding-top:10px; border-top:1px solid rgba(255,255,255,0.08);">
+            <p style="font-weight:bold; margin-bottom:6px; font-size:11px; color:#94a3b8;">Advertised by : SRS Marketing Agency</p>
+            <a href="https://t.me/srsagency" target="_blank" style="
+                display:inline-block;
+                background-color:#FF0000;
+                color:#ffffff;
+                padding:6px 14px;
+                border-radius:6px;
+                text-decoration:none;
+                font-weight:600;
+                font-size:12px;
+                font-family:sans-serif;">
+                📩 Visit @ * SRS Marketing Agenncy ...
+            </a>
+        </div>
+
+    <div class="footer-legal">
+      Disclaimer: All content shared by Gautam Kumar Jha, including on this website and the associated Telegram channel, is for educational and informational purposes only and does not constitute investment advice, a recommendation, or a solicitation to buy or sell any security. Gautam Kumar Jha is not registered with SEBI as an Investment Adviser or Research Analyst. Trading and investing carry risk of loss, including loss of principal, and past performance does not guarantee future results. Please consult a SEBI-registered financial advisor before making investment decisions. Use of this website and channel is at your own discretion and risk.
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Gautam Kumar Jha. All rights reserved.</span>
+      <span>Educational content only · Not investment advice · 18+</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '2265902907548565');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=2265902907548565&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // CTA click tracking — uses "Subscribe" event
+  document.querySelectorAll('.cta-telegram').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      if (typeof fbq === 'function') {
+        fbq('track', 'Subscribe');
+      }
+    });
+  });
+</script>
+</body>
+</html>
